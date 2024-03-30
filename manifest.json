@@ -1,0 +1,15 @@
+{
+  "name": "Cover Letter Generator",
+  "description": "A Chrome extension that generates cover letters using OpenAI Chat API.",
+  "version": "0.1",
+  "manifest_version": 3,
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": "images/48.png"
+  },
+  "permissions": [
+    "storage",
+    "activeTab",
+    "scripting"
+  ]
+}

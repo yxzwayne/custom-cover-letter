@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Cover Letter Generator</title>
+  <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+
+<body>
+  <div id="apiKeyContainer">
+    <p>Enter your OpenAI API key</p>
+    <input type="text" id="apiKeyInput" placeholder="Enter your OpenAI API key">
+    <button id="submitApiKey">Submit</button>
+  </div>
+
+  <div id="resumeContainer">
+    <p>Resume content below:</p>
+    <textarea id="resumeInput" placeholder="Paste your resume content here"></textarea>
+    <button id="saveResume">Save Resume</button>
+  </div>
+
+  <div id="jobDescContainer">
+    <p>Paste the job description below:</p>
+    <textarea id="jobDescInput" placeholder="Paste the job description here"></textarea>
+  </div>
+
+  <div id="systemPromptContainer">
+    <p>Change this if you want to use custom system prompt.</p>
+    <textarea id="systemPromptInput" placeholder="Enter the system prompt"></textarea>
+    <button id="togglePrompts">Click to see prompts</button>
+    <div id="promptsContainer" style="display: none;"></div>
+  </div>
+
+  <button id="generateCoverLetter">Generate Cover Letter</button>
+  <div id="feedback"></div>
+  <div id="jobDescAlert" style="color: red;"></div>
+  <div id="outputContainer">
+    <textarea id="coverLetterOutput" readonly></textarea>
+  </div>
+  <script src="scripts/popup.js"></script>
+</body>
+
+</html>
