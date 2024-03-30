@@ -93,13 +93,17 @@ saveResume.addEventListener('click', function () {
 generateCoverLetter.addEventListener('click', function () {
     const jobDescription = jobDescInput.value.trim();
     const jobDescAlert = document.getElementById('jobDescAlert');
+    // Fetch the selected model from the dropdown
+    const selectedModel = document.getElementById('modelSelect').value;
     if (jobDescription && jobDescription.split(' ').length >= 10) {
+        document.getElementById('feedback').innerText = 'Generating cover letter. This may take a while depending on length of the resume and job description or OpenAI\'s volume.';
         jobDescAlert.textContent = ''; // Clear the alert
         chrome.storage.local.get(['apiKey', 'resumeContent'], function (data) {
             const apiKey = data.apiKey;
             const resumeContent = data.resumeContent;
             if (apiKey && resumeContent) {
-                generateCoverLetterFromAPI(apiKey, resumeContent, jobDescription);
+                // Pass the selected model to the function
+                generateCoverLetterFromAPI(apiKey, resumeContent, jobDescription, selectedModel);
             } else {
                 alert('Please provide your API key and resume content.');
             }
@@ -110,7 +114,7 @@ generateCoverLetter.addEventListener('click', function () {
 });
 
 // Generate cover letter using OpenAI Chat API
-async function generateCoverLetterFromAPI(apiKey, resumeContent, jobDescription) {
+async function generateCoverLetterFromAPI(apiKey, resumeContent, jobDescription, model) {
     const prompt = `Resume:\n${resumeContent}\n\nJob Description:\n${jobDescription}\n\n${defaultUserPromptSuffix}\n`;
 
     const requestOptions = {
@@ -137,11 +141,6 @@ async function generateCoverLetterFromAPI(apiKey, resumeContent, jobDescription)
         alert('An error occurred while generating the cover letter. Please try again.');
     }
 }
-
-document.getElementById('generateCoverLetter').addEventListener('click', function () {
-    // Display a loading message
-    document.getElementById('feedback').innerText = 'Generating cover letter. This may take a while depending on length of the resume and job description or OpenAI\'s volume.';
-});
 
 // Download cover letter as a .txt file
 function downloadCoverLetter(coverLetter) {
